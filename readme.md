@@ -37,7 +37,7 @@ Fetches all books available in the store.
 ```bash
 GET http://localhost:3000/api/books
 ```
-````
+
 
 ### 2. **GET /api/books/:id**
 
@@ -184,6 +184,4 @@ This project is licensed under the MIT License.
 Make sure to replace the `your_mongodb_connection_string` in the `.env` file with your actual MongoDB connection string.
 
 ```
-
-This `README.md` file explains how to use the API, setup instructions, and provides examples for each endpoint. You can customize it according to your project needs.
-```
+````
