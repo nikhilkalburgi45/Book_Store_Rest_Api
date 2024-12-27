@@ -1,28 +1,29 @@
 const bookModel = require("../models/book");
 
-const getAllBooks = async (req, res) => {
+
+
+const addNewBook = async (req, res) => {
   try {
-    const allBooks = await bookModel.find();
-    if (allBooks?.length > 0) {
-      res.status(200).json({
+    const newBookFromData = req.body;
+    const newlyCreatedBook = await bookModel.create(newBookFromData);
+    if (newlyCreatedBook) {
+      res.status(201).json({
         success: true,
-        message: "All Books Fetched Successfully",
-        data: allBooks,
-      });
-    } else {
-      res.status(404).json({
-        success: false,
-        message: "No Books Found",
+        message: "Book created successfully",
+        data: newlyCreatedBook,
       });
     }
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error fetching books",
+      message: "Error creating book",
       error: error.message,
     });
   }
 };
+
+
+
 
 const getSingleBookById = async (req, res) => {
   try {
@@ -49,25 +50,35 @@ const getSingleBookById = async (req, res) => {
   }
 };
 
-const addNewBook = async (req, res) => {
+
+
+
+const getAllBooks = async (req, res) => {
   try {
-    const newBookFromData = req.body;
-    const newlyCreatedBook = await bookModel.create(newBookFromData);
-    if (newlyCreatedBook) {
-      res.status(201).json({
+    const allBooks = await bookModel.find();
+    if (allBooks?.length > 0) {
+      res.status(200).json({
         success: true,
-        message: "Book created successfully",
-        data: newlyCreatedBook,
+        message: "All Books Fetched Successfully",
+        data: allBooks,
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: "No Books Found",
       });
     }
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Error creating book",
+      message: "Error fetching books",
       error: error.message,
     });
   }
 };
+
+
+
 
 const updateBook = async (req, res) => {
   try {
@@ -99,6 +110,9 @@ const updateBook = async (req, res) => {
   }
 };
 
+
+
+
 const deleteBook = async (req, res) => {
   try {
     const getCurrentBookID = req.params.id;
@@ -124,6 +138,9 @@ const deleteBook = async (req, res) => {
     });
   }
 };
+
+
+
 
 module.exports = {
   getAllBooks,
